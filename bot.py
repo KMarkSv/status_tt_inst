@@ -99,7 +99,7 @@ async def cmd_start(message: Message):
             "/instagram — добавить Instagram аккаунт для отслеживания\n"
             "/tiktok — добавить TikTok аккаунт для отслеживания\n"
             "<code>/tt_delete &lt;@никнейм&gt;</code> — удалить аккаунт TikTok.\n"
-            "<code>/ins_delete &lt;никнейм&gt;</code> — удалить аккаунт Instagram.\n\n"
+            "<code>/ins_delete &lt;@никнейм&gt;</code> — удалить аккаунт Instagram.\n\n"
             "После ввода команды отправь никнейм аккаунта.")
     await message.answer(text, parse_mode="HTML")
 
