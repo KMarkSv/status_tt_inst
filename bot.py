@@ -1,4 +1,4 @@
-import os
+import os 
 import json
 import asyncio
 import instaloader
@@ -96,7 +96,7 @@ async def cmd_start(message: Message):
     text = ("Привет! Я могу отслеживать статус аккаунтов Instagram и TikTok.\n\n"
             "Используй команды:\n"
             "/info — проверка статуса\n"
-            "/inst — добавить Instagram аккаунт для отслеживания\n"
+            "/instagram — добавить Instagram аккаунт для отслеживания\n"
             "/tiktok — добавить TikTok аккаунт для отслеживания\n"
             "<code>/tt_delete &lt;@никнейм&gt;</code> — удалить аккаунт TikTok.\n"
             "<code>/ins_delete &lt;никнейм&gt;</code> — удалить аккаунт Instagram.\n\n"
@@ -135,7 +135,7 @@ async def tt_delete(message: Message):
 
 
 
-@dp.message(Command('inst'))
+@dp.message(Command('instagram'))
 async def cmd_inst(message: Message):
     await message.answer("Введи ник Instagram аккаунта для отслеживания:")
     dp.message.register(instagram_receive_username, F.text)
