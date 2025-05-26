@@ -235,6 +235,7 @@ async def periodic_tiktok_check():
 @dp.message(Command('info'))
 async def info(message:Message):
     st = ''
+    st2 = ''
     accounts = load_accounts(INSTAGRAM_FILE)
     for username, info in accounts.items():
         if info['status'] == 'ПРИВАТНЫЙ':
@@ -246,9 +247,9 @@ async def info(message:Message):
     accounts = load_accounts(TIKTOK_FILE)
     for username, info in accounts.items():
         if info['status'] == 'ПРИВАТНЫЙ':
-            st = '✅'
+            st2 = '✅'
         else:
-            st = '🆘'
+            st2 = '🆘'
         await message.answer(f"TikTok аккаунт @{username}.\nТекущий статус: {st}{info['status']}")
 
 # =============== ЗАПУСК БОТА ===============
