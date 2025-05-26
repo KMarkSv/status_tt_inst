@@ -216,13 +216,13 @@ async def periodic_tiktok_check():
             if current_status and current_status != info['status']:
                 chat_id = info['chat_id']
                 if info['status'] == 'ПРИВАТНЫЙ':
-                      st = '✅ПРИВАТНЫЙ'
+                      st = '✅'
                 else:
-                      st = '🆘ОТКРЫТЫЙ'
+                      st = '🆘'
                 if current_status == 'ПРИВАТНЫЙ':
-                      st2 = '✅ПРИВАТНЫЙ'
+                      st2 = '✅'
                 else:
-                      st2 = '🆘ОТКРЫТЫЙ'
+                      st2 = '🆘'
                 await bot.send_message(chat_id,
                     f"🔔 Изменился статус TikTok аккаунта @{username}:\n"
                     f"Было: {st}{info['status']}\n"
