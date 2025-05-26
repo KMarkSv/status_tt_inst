@@ -224,17 +224,17 @@ async def info(message:Message):
     accounts = load_accounts(INSTAGRAM_FILE)
     for username, info in accounts.items():
         if info['status'] == 'ПРИВАТНЫЙ':
-            st + '✅'
+            st = '✅'
         else:
-            st + '🆘'
+            st = '🆘'
         await message.answer(f"Instagram аккаунт @{username}.\nТекущий статус: {st}{info['status']}")
 
     accounts = load_accounts(TIKTOK_FILE)
     for username, info in accounts.items():
         if info['status'] == 'ПРИВАТНЫЙ':
-            st + '✅'
+            st = '✅'
         else:
-            st + '🆘'
+            st = '🆘'
         await message.answer(f"TikTok аккаунт @{username}.\nТекущий статус: {st}{info['status']}")
 
 # =============== ЗАПУСК БОТА ===============
