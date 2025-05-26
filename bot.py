@@ -123,9 +123,10 @@ async def tt_delete(message: Message):
 async def tt_delete(message: Message):
     command_parts = message.text.split()
     accounts = load_accounts(INSTAGRAM_FILE)  # Загружаем JSON в виде словаря
-
+    if command_parts[1].startswith('@'):
+        command_parts[1] = command_parts[1][1:]
     username_to_delete = command_parts[1]
-
+    
     if username_to_delete in accounts:
         del accounts[username_to_delete]  # Удаляем аккаунт
         save_accounts(INSTAGRAM_FILE, accounts)  # Сохраняем обратно
@@ -207,6 +208,7 @@ async def periodic_instagram_check():
 async def periodic_tiktok_check():
     await asyncio.sleep(1 * 60)  # задержка 10 минут для смещения от Instagram
     while True:
+      st2 = ''
         st = ''
         accounts = load_accounts(TIKTOK_FILE)
         for username, info in accounts.items():
@@ -217,11 +219,14 @@ async def periodic_tiktok_check():
                       st = '✅ПРИВАТНЫЙ'
                 else:
                       st = '🆘ОТКРЫТЫЙ'
-                await bot.send_message(chat_id,f'{st}')
+                if current_status == 'ПРИВАТНЫЙ':
+                      st2 = '✅ПРИВАТНЫЙ'
+                else:
+                      st2 = '🆘ОТКРЫТЫЙ'
                 await bot.send_message(chat_id,
                     f"🔔 Изменился статус TikTok аккаунта @{username}:\n"
-                    f"Было: {info['status']}\n"
-                    f"Стало: {current_status}")
+                    f"Было: {st}{info['status']}\n"
+                    f"Стало: {st2}{current_status}")
                 accounts[username]['status'] = current_status
                 save_accounts(TIKTOK_FILE, accounts)
         await asyncio.sleep(15 * 60)  # 10 часов
