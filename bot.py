@@ -8,7 +8,7 @@ from aiogram.filters import Command
 from aiogram.types import Message
 
 # === НАСТРОЙКИ ===
-TOKEN = '7386490904:AAFOoJkDiPGVPnQypNJyEoVRAum335ehL30'
+TOKEN = '7688474197:AAHMyh4T9-h2nj1dooZodBFpbYX_a-jlXI4'
 
 INSTAGRAM_USERNAME = 'vasiakushv'
 INSTAGRAM_PASSWORD = 'kmskmskms'
