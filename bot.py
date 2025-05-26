@@ -55,7 +55,7 @@ async def instagram_check(username):
 
     try:
         profile = instaloader.Profile.from_username(L.context, username)
-        status = "ПРИВАТНЫЙ" if profile.is_private else "ОТКРЫТЫЙ"
+        status = "✅ПРИВАТНЫЙ" if profile.is_private else "🆘ОТКРЫТЫЙ"
         return status
     except Exception as e:
         print(f"[❌] Ошибка получения профиля Instagram @{username}: {e}")
@@ -199,10 +199,10 @@ async def periodic_instagram_check():
                     f"Стало: {current_status}")
                 accounts[username]['status'] = current_status
                 save_accounts(INSTAGRAM_FILE, accounts)
-        await asyncio.sleep(10 * 60 * 60)  # 10 часов
+        await asyncio.sleep(15 * 60)  # 10 часов
 
 async def periodic_tiktok_check():
-    await asyncio.sleep(10 * 60)  # задержка 10 минут для смещения от Instagram
+    await asyncio.sleep(1 * 60)  # задержка 10 минут для смещения от Instagram
     while True:
         accounts = load_accounts(TIKTOK_FILE)
         for username, info in accounts.items():
@@ -215,18 +215,27 @@ async def periodic_tiktok_check():
                     f"Стало: {current_status}")
                 accounts[username]['status'] = current_status
                 save_accounts(TIKTOK_FILE, accounts)
-        await asyncio.sleep(10 * 60 * 60)  # 10 часов
+        await asyncio.sleep(15 * 60)  # 10 часов
 
 
 @dp.message(Command('info'))
 async def info(message:Message):
+    st = ''
     accounts = load_accounts(INSTAGRAM_FILE)
     for username, info in accounts.items():
-        await message.answer(f"Instagram аккаунт @{username}.\nТекущий статус: {info['status']}")
+        if info['status'] == 'ПРИВАТНЫЙ':
+            st += '✅'
+        else:
+            st += '🆘'
+        await message.answer(f"Instagram аккаунт @{username}.\nТекущий статус: {st}{info['status']}")
 
     accounts = load_accounts(TIKTOK_FILE)
     for username, info in accounts.items():
-        await message.answer(f"TikTok аккаунт @{username}.\nТекущий статус: {info['status']}")
+        if info['status'] == 'ПРИВАТНЫЙ':
+            st += '✅'
+        else:
+            st += '🆘'
+        await message.answer(f"TikTok аккаунт @{username}.\nТекущий статус: {st}{info['status']}")
 
 # =============== ЗАПУСК БОТА ===============
 
