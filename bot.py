@@ -81,9 +81,9 @@ async def tiktok_check(username):
                     return None
                 text = await resp.text()
                 if "This account is private" in text or "Account is private" in text:
-                    return "ПРИВАТНЫЙ"
+                    return "✅ПРИВАТНЫЙ"
                 else:
-                    return "ОТКРЫТЫЙ"
+                    return "🆘ОТКРЫТЫЙ"
         except Exception as e:
             print(f"[❌] Ошибка при проверке TikTok @{username}: {e}")
             return None
@@ -193,6 +193,9 @@ async def periodic_instagram_check():
             current_status = await instagram_check(username)
             if current_status and current_status != info['status']:
                 chat_id = info['chat_id']
+                profile = instaloader.Profile.from_username(L.context, username)
+                status = "✅ПРИВАТНЫЙ" if profile.is_private else "🆘ОТКРЫТЫЙ"
+                await bot.send_message(chat_id,f'{status}')
                 await bot.send_message(chat_id,
                     f"🔔 Изменился статус Instagram аккаунта @{username}:\n"
                     f"Было: {info['status']}\n"
@@ -204,11 +207,17 @@ async def periodic_instagram_check():
 async def periodic_tiktok_check():
     await asyncio.sleep(1 * 60)  # задержка 10 минут для смещения от Instagram
     while True:
+        st = ''
         accounts = load_accounts(TIKTOK_FILE)
         for username, info in accounts.items():
             current_status = await tiktok_check(username)
             if current_status and current_status != info['status']:
                 chat_id = info['chat_id']
+                if info['status'] == 'ПРИВАТНЫЙ':
+                      st = '✅ПРИВАТНЫЙ'
+                else:
+                      st = '🆘ОТКРЫТЫЙ'
+                await bot.send_message(chat_id,f'{st}')
                 await bot.send_message(chat_id,
                     f"🔔 Изменился статус TikTok аккаунта @{username}:\n"
                     f"Было: {info['status']}\n"
