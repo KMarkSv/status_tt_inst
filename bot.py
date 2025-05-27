@@ -1,3 +1,4 @@
+import random
 import os
 import json
 import asyncio
@@ -105,7 +106,7 @@ async def tiktok_check(username):
 @dp.message(Command('start'))
 async def cmd_start(message: Message):
     print('start')
-    text = ("Привет! Я могу отслеживать статус аккаунтов Instagram и TikTok.\n\n"
+    text = ("Приветeeeee! Я могу отслеживать статус аккаунтов Instagram и TikTok.\n\n"
             "Используй команды:\n"
             "/info — проверка статуса\n"
             "/inst — добавить Instagram аккаунт для отслеживания\n"
