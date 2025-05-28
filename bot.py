@@ -15,7 +15,7 @@ d_smy = {'ОТКРЫТЫЙ':'🆘', 'ПРИВАТНЫЙ': '✅'}
 INSTAGRAM_USERNAME = 'forinst1221'
 INSTAGRAM_PASSWORD = 'kmskmskms'
 PROXIES = [
-    "",
+    "http://markkukiko:La7gwGRdgQ@96.62.127.60:50100",
 ]
 USER_AGENT = ('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
               '(KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36')
