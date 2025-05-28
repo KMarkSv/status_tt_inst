@@ -12,7 +12,7 @@ from aiogram.types import Message
 TOKEN = '7688474197:AAHMyh4T9-h2nj1dooZodBFpbYX_a-jlXI4'
 
 d_smy = {'ОТКРЫТЫЙ':'🆘', 'ПРИВАТНЫЙ': '✅'}
-INSTAGRAM_USERNAME = 'forinst1221'
+INSTAGRAM_USERNAME = 'vasiakushv'
 INSTAGRAM_PASSWORD = 'kmskmskms'
 PROXIES = [
     "",
