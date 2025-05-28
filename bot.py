@@ -43,13 +43,13 @@ def save_accounts(filename, data):
 
 async def instagram_check(username):
     # Выбираем случайный прокси из списка
-    proxy = random.choice(PROXIES)
+    #proxy = random.choice(PROXIES)
 
     L = instaloader.Instaloader()
-    L.context.proxy = proxy
+    #L.context.proxy = proxy
     L.context.user_agent = USER_AGENT
 
-    print(f"[ℹ️] Используем прокси: {proxy}")
+    #print(f"[ℹ️] Используем прокси: {proxy}")
 
     try:
         L.load_session_from_file(INSTAGRAM_USERNAME)
