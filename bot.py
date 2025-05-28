@@ -42,26 +42,33 @@ def save_accounts(filename, data):
 # ============== INSTAGRAM ================
 
 async def instagram_check(username):
+    # Выбираем случайный прокси из списка
+    proxy = random.choice(PROXIES)
+
     L = instaloader.Instaloader()
+    L.context.proxy = proxy
     L.context.user_agent = USER_AGENT
 
-    try:
-        # Пробуем загрузить ранее сохранённую сессию
-        L.load_session_from_file(INSTAGRAM_USERNAME)
-        print("[✅] Сессия Instagram успешно загружена.")
-    except Exception as e:
-        print(f"[❌] Ошибка загрузки сессии: {e}")
-        print("👉 Возможно, требуется пройти подтверждение по ссылке.")
-        return None  # Не логинимся автоматически, если Instagram требует challenge
+    print(f"[ℹ️] Используем прокси: {proxy}")
 
     try:
-        # Загружаем профиль
+        L.load_session_from_file(INSTAGRAM_USERNAME)
+    except Exception:
+        try:
+            L.login(INSTAGRAM_USERNAME, INSTAGRAM_PASSWORD)
+            L.save_session_to_file()
+        except Exception as e:
+            print(f"[❌] Ошибка входа Instagram: {e}")
+            return None
+
+    try:
         profile = instaloader.Profile.from_username(L.context, username)
         status = "ПРИВАТНЫЙ" if profile.is_private else "ОТКРЫТЫЙ"
         return status
     except Exception as e:
         print(f"[❌] Ошибка получения профиля Instagram @{username}: {e}")
         return None
+
 
 # =============== TIKTOK ==================
 
